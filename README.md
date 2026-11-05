@@ -16,28 +16,6 @@ Doble clic en `index.html`. Funciona en Chrome, Safari, Firefox y Edge actualiza
 
 > Si abrís la consola del navegador vas a ver un aviso sobre la "precarga" de las fuentes: pasa solo al abrir el archivo directo desde la compu. Publicada no aparece y la página se ve igual.
 
----
-
-## Publicar en GitHub Pages
-
-1. Entrá a [github.com](https://github.com) y creá un repositorio nuevo, **público**, por ejemplo `retazos-web`.
-2. En el repositorio: **Add file → Upload files** y arrastrá **todo lo que está adentro de esta carpeta** (`index.html`, `css`, `js`, `img`, `fuentes`, `README.md`). Tiene que quedar `index.html` en la raíz del repositorio, no adentro de otra carpeta. Confirmá con **Commit changes**.
-3. Andá a **Settings → Pages**. En *Build and deployment* elegí **Source: Deploy from a branch**, **Branch: main** y carpeta **/ (root)**. Guardá.
-4. En uno o dos minutos la web queda en `https://TU-USUARIO.github.io/retazos-web/`.
-
-El archivo oculto `.nojekyll` es opcional (le indica a GitHub que no procese la carpeta). Si no se sube porque tu compu no muestra archivos ocultos, no pasa nada.
-
-## Publicar en Vercel
-
-1. Subí la carpeta a un repositorio de GitHub (pasos 1 y 2 de arriba).
-2. En [vercel.com](https://vercel.com): **Add New → Project**, importá el repositorio.
-3. *Framework Preset*: **Other**. No hace falta comando de build ni carpeta de salida. **Deploy**.
-
-Todas las rutas son relativas, así que funciona igual en la raíz de un dominio o en una subcarpeta.
-
-**Después de publicar (opcional):** en `index.html`, cambiá `content="img/comun/og-retazos.jpg"` de la etiqueta `og:image` por la dirección completa (por ejemplo `https://TU-USUARIO.github.io/retazos-web/img/comun/og-retazos.jpg`). Es la imagen que aparece al compartir el link por WhatsApp o redes.
-
----
 
 ## Cómo está hecha (para editar)
 
@@ -93,33 +71,3 @@ Colores de los elementos agregados (vienen de la propuesta anterior): puntos de 
 
 Si preferís sacar los elementos agregados de Palermo y San Telmo, borrá en `index.html` las dos líneas `<img ... src="img/barrios/elemento-palermo.svg">` y `elemento-san-telmo.svg`.
 
----
-
-## A definir (no está en la maqueta)
-
-| Elemento | Hoy lleva a | Falta |
-|---|---|---|
-| Navegación y botón "Ver la edición" | anclas a cada sección | páginas propias, si se diseñan |
-| "Ver barrio" | al carrusel | páginas de barrio |
-| Fichas de la tienda, "Ver toda la tienda", buscar y bolsa | a la sección Tienda | tienda, producto, carrito y buscador |
-| Precios | "[precio]" | los valores |
-| "Cómo funciona" | queda en Pasaporte | explicación del pasaporte |
-| "Cómo llegar" | queda en Ferias | dirección del Galpón La Costura (por ejemplo, link a Google Maps) |
-| "@retazos", Instagram y TikTok | sin destino | URLs de las cuentas |
-| Newsletter | solo valida | servicio de envío (Mailchimp, Brevo, Buttondown, etc.) |
-| Envíos, Cambios, Contacto | sin destino | páginas de ayuda |
-
----
-
-## Tipografía Brasilero 2018 Free: revisar la licencia antes de publicar
-
-El archivo de la fuente dice *"Copyright 2017 Crystian Cruz. All rights reserved."* y no trae licencia adjunta. Al publicar la web en GitHub, el archivo `fuentes/brasilero-2018-free.woff2` queda descargable por cualquiera. Antes de hacerla pública conviene confirmar con el autor (crystiancruz.com) que la versión Free permite uso web; si no, hay que comprar la licencia web de la familia Brasilêro o reemplazarla. Para cambiarla alcanza con reemplazar el archivo y el `@font-face` del principio de `css/estilos.css`.
-
-Cairo tiene licencia SIL Open Font License (`fuentes/cairo-OFL.txt`): se puede usar y publicar sin problema.
-
----
-
-## Notas
-
-- Las fotos son las de la maqueta: algunas ya se ven por debajo de 1x en escritorio (hero, Caballito, Sobre Retazos), como avisaba la entrega. Con fotos de más resolución se verían más nítidas en pantallas retina; para cambiarlas hay que respetar el mismo recorte.
-- Decisiones que la entrega dejaba abiertas y quedaron como en la maqueta: Cairo en Regular 400 en todo el texto y botones con texto de 17 px (contraste 4,0 sobre rosa). La franja ahora se mueve (era una de las dos opciones de la entrega); con "movimiento reducido" activado vuelve a quedar quieta.
