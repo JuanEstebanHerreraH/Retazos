@@ -1,5 +1,7 @@
 # Retazos · Edición CABA — página web
 
+**Diseño:** Evelin Standke · **Programación:** Esteban Herrera
+
 Web de una sola página armada a partir de la maqueta final **"RETAZOS - Página Web"** (mesa de 1440 × 8454 px).
 Está hecha con **HTML, CSS y JavaScript sin dependencias**: no hay que instalar nada ni compilar. Sirve tal cual para **GitHub Pages** o **Vercel**.
 
@@ -58,8 +60,10 @@ fuentes/            Cairo (licencia OFL) y Brasilero 2018 Free
 - **Carrusel de barrios:** flechas, clic en las miniaturas, clic en un slide vecino, teclas ← → y deslizar con el dedo. Da la vuelta (de Caballito pasa a La Boca). Sin autoplay.
 - **Links del pie "La Boca / Palermo / San Telmo / Caballito":** bajan al carrusel y muestran ese barrio.
 - **Menú del celular:** botón de tres líneas, se cierra con Esc o al elegir una sección.
+- **Franja "llevate un rincón del barrio" (solo PC):** corre despacio hacia la izquierda, en bucle sin cortes (un ciclo cada 40 s). Se frena al pasar el mouse por encima. La velocidad se cambia en `css/estilos.css` (la animación `franja-scroll`, en el bloque de escritorio).
+- **Libretas del hero (solo PC):** las de La Boca y Palermo se levantan y se inclinan un poco al pasar el cursor. Se ajusta en `css/estilos.css`, en las reglas `.hero-libreta`.
 - **Newsletter:** valida el mail al enviar y muestra la confirmación en el lugar del formulario. **Todavía no envía datos a ningún lado** (ver "A definir").
-- **Movimiento reducido:** si la persona lo pide en su sistema, se apagan las animaciones.
+- **Movimiento reducido:** si la persona lo pide en su sistema (ajuste del navegador o del teléfono), se apagan todas las animaciones, incluida la franja y el movimiento de las libretas.
 
 ---
 
@@ -118,4 +122,4 @@ Cairo tiene licencia SIL Open Font License (`fuentes/cairo-OFL.txt`): se puede u
 ## Notas
 
 - Las fotos son las de la maqueta: algunas ya se ven por debajo de 1x en escritorio (hero, Caballito, Sobre Retazos), como avisaba la entrega. Con fotos de más resolución se verían más nítidas en pantallas retina; para cambiarlas hay que respetar el mismo recorte.
-- Decisiones que la entrega dejaba abiertas y quedaron como en la maqueta: Cairo en Regular 400 en todo el texto, botones con texto de 17 px (contraste 4,0 sobre rosa) y la franja quieta.
+- Decisiones que la entrega dejaba abiertas y quedaron como en la maqueta: Cairo en Regular 400 en todo el texto y botones con texto de 17 px (contraste 4,0 sobre rosa). La franja ahora se mueve (era una de las dos opciones de la entrega); con "movimiento reducido" activado vuelve a quedar quieta.
