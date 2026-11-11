@@ -7,3 +7,12 @@
 @media (max-width:1199.98px) {
  .sobre-circulos { height:auto; align-self:start; }
 }
+@media (max-width:767.98px) {
+ .sobre { padding-top:90px; }
+ .sobre-circulos {
+   position:absolute; top:0; left:50%; transform:translateX(-50%);
+   width:780px; height:auto; clip-path:inset(0 0 65%);
+ }
+ .sobre-titulo { margin-top:0; }
+ .sobre-texto { margin-top:28px; }
+}
