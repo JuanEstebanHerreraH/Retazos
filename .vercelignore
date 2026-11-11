@@ -5,6 +5,7 @@
 .github/
 .codex/
 node_modules/
+public/
 __pycache__/
 .env
 .env.*

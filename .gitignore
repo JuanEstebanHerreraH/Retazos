@@ -16,6 +16,7 @@
 /screenshots/
 /previews/
 /referencias/
+/public/
 
 # Imágenes, vectores, originales de diseño y medios en cualquier carpeta.
 *.[sS][vV][gG]
