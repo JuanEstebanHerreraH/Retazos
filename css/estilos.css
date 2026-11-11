@@ -190,13 +190,21 @@ input { font: inherit; color: inherit; border: 0; border-radius: 0; margin: 0; }
 /* =========================================================
    DESKTOP · 1200 px o más · la maqueta exacta
    ========================================================= */
-/* Movimiento de la franja: el texto corre hacia la izquierda en bucle.
-   Como el texto es una serie de copias idénticas, al desplazarlo medio ancho
-   (= un bloque de copias) el dibujo vuelve a coincidir y no se nota el salto. */
+/* Dos bloques idénticos: el segundo ocupa el lugar del primero al terminar
+   el recorrido, sin espacios vacíos ni saltos entre vueltas. La pista se
+   mueve por separado para conservar el centrado vertical en móvil. */
 @keyframes franja-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+.franja-texto { width: max-content; }
+.franja-pista {
+  display: flex;
+  width: max-content;
+  animation: franja-scroll 40s linear infinite;
+  will-change: transform;
+}
+.franja-bloque { display: block; flex: 0 0 auto; white-space: nowrap; }
 
 @media (min-width: 1200px) {
   .pagina {
@@ -238,14 +246,6 @@ input { font: inherit; color: inherit; border: 0; border-radius: 0; margin: 0; }
   .boton:hover { translate: 0 calc(-2 * var(--u)); box-shadow: calc(3 * var(--u)) calc(4 * var(--u)) 0 var(--sombra-18); }
   .link-linea::after { top: calc(var(--ly) * var(--u)); width: 100%; height: calc(var(--lh) * var(--u)); }
   .link-linea:hover::after { height: calc((var(--lh) + 1) * var(--u)); }
-
-  /* Franja "llevate un rincón del barrio" en movimiento lento.
-     Un ciclo cada 40 s, sin saltos. Se frena al pasar el mouse por encima. */
-  .franja-texto {
-    animation: franja-scroll 40s linear infinite;
-    will-change: transform;
-  }
-  .franja:hover .franja-texto { animation-play-state: paused; }
 
   /* Libretas del hero: se levantan y se inclinan un poco al pasar el cursor.
      El giro es sobre el centro de cada libreta (la imagen va dentro de un div
@@ -583,5 +583,6 @@ input { font: inherit; color: inherit; border: 0; border-radius: 0; margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* La franja tiene movimiento continuo por decisión del diseño. */
+  *:not(.franja-pista), *::before, *::after { animation: none !important; transition: none !important; }
 }
