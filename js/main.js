@@ -105,10 +105,6 @@
       inicioX = inicioY = null;
     }, { passive: true });
 
-    // links del pie (La Boca, Palermo, San Telmo, Caballito): eligen el barrio en el carrusel
-    Array.prototype.forEach.call(document.querySelectorAll('.pie [data-barrio]'), function (a) {
-      a.addEventListener('click', function () { irA(a.getAttribute('data-barrio')); });
-    });
   }
 
   /* ---------------------------------------------------------
