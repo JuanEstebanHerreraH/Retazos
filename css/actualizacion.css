@@ -11,6 +11,7 @@
  .sobre { padding-top:90px; }
  .sobre-circulos {
    position:absolute; top:0; left:50%; transform:translateX(-50%);
+   grid-area:auto;
    width:780px; height:auto; clip-path:inset(0 0 85%);
  }
  .sobre-titulo { margin-top:0; }
