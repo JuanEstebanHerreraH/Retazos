@@ -19,7 +19,7 @@
 
 Retazos transforma recorridos, fachadas, carteles y detalles de la ciudad en libretas, kits de retazos, totes y un pasaporte para coleccionar barrios. La web conserva esa identidad de collage con fotografías, sellos, cintas y bordes de papel.
 
-**Diseño e identidad visual:** Evelin Standke.  
+**Diseño e identidad visual:** Evelin Standke.  — [Linkedin](https://www.linkedin.com/in/evelin-standke-624773318/).
 **Desarrollo web:** Juan Esteban Herrera Herrera — [GitHub](https://github.com/JuanEstebanHerreraH).
 
 ## Recorrer los barrios
