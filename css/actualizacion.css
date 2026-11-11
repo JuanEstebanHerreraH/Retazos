@@ -1,0 +1,9 @@
+/* Ajustes V2 del inicio, compartidos con las páginas de barrio. */
+.sobre-circulos { object-fit:contain; pointer-events:none; }
+.mosaico-item { display:block; }
+.mosaico-item:hover .mosaico-foto { filter:brightness(1.06); }
+.mosaico-item:focus-visible { outline:3px solid var(--marron); outline-offset:3px; z-index:2; }
+.ig-link { white-space:nowrap; }
+@media (max-width:1199.98px) {
+ .sobre-circulos { height:auto; align-self:start; }
+}
