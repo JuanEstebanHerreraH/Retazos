@@ -1,73 +1,86 @@
-# Retazos · Edición CABA — página web
+<p align="center">
+  <img src="img/comun/logo-retazos.svg" width="240" alt="Retazos">
+</p>
 
-**Diseño:** Evelin Standke · **Programación:** Esteban Herrera
+<h1 align="center">Llevate un rincón del barrio</h1>
 
-Web de una sola página armada a partir de la maqueta final **"RETAZOS - Página Web"** (mesa de 1440 × 8454 px).
-Está hecha con **HTML, CSS y JavaScript sin dependencias**: no hay que instalar nada ni compilar. Sirve tal cual para **GitHub Pages** o **Vercel**.
+<p align="center">Papelería con los colores, las texturas y las historias de Buenos Aires.<br>Edición CABA · La Boca · Palermo · San Telmo · Caballito</p>
 
-- **Escritorio (1200 px o más):** es la maqueta exacta. Se comparó píxel a píxel contra el JPG de referencia a 1440 px: todos los elementos caen en el mismo lugar (diferencias de 0 a 1 px). En pantallas más chicas o más grandes la composición se escala entera, así que se ve igual en 1280, 1440 o 1920.
-- **Tablet y celular (menos de 1200 px):** las secciones se reordenan en columna siguiendo la propuesta responsive de la entrega (`02_responsive.md`). No se esconde contenido; solo se reducen decorativos.
+<p align="center">
+  <a href="https://retazoscaba.vercel.app/">Ver la web</a> ·
+  <a href="https://www.instagram.com/retazos_ar/">@retazos_ar</a> ·
+  <a href="#recorrer-los-barrios">Recorrer los barrios</a> ·
+  <a href="#abrir-el-proyecto">Abrir el proyecto</a>
+</p>
+
+![Identidad visual de Retazos: papeles rasgados, casas de colores y libretas de barrio](img/v2-preview-inicio.webp)
+
+## Una ciudad, cuatro formas de llevarla con vos
+
+Retazos transforma recorridos, fachadas, carteles y detalles de la ciudad en libretas, kits de retazos, totes y un pasaporte para coleccionar barrios. La web conserva esa identidad de collage con fotografías, sellos, cintas y bordes de papel.
+
+**Diseño e identidad visual:** Evelin Standke.  
+**Desarrollo web:** Juan Esteban Herrera Herrera — [GitHub](https://github.com/JuanEstebanHerreraH).
+
+## Recorrer los barrios
+
+Cada botón **Ver barrio** abre una página con su historia visual: de la calle a la trama y a la tapa, su paleta de colores, tres lugares para recorrer y los productos de la colección. El pie de página y la sección **Seguí recorriendo** conectan los cuatro recorridos.
+
+| La Boca | Palermo |
+|:---:|:---:|
+| [![La Boca](img/v2-preview-la-boca.webp)](https://retazoscaba.vercel.app/la-boca.html) | [![Palermo](img/v2-preview-palermo.webp)](https://retazoscaba.vercel.app/palermo.html) |
+| Chapas de colores que se ven desde el puerto. | Jacarandás, parques y un planetario a la vuelta. |
+| **San Telmo** | **Caballito** |
+| [![San Telmo](img/v2-preview-san-telmo.webp)](https://retazoscaba.vercel.app/san-telmo.html) | [![Caballito](img/v2-preview-caballito.webp)](https://retazoscaba.vercel.app/caballito.html) |
+| Toldos, adoquines y casas que guardan historia. | El barrio del canje, la veleta y el tranvía. |
+
+*Las imágenes de esta documentación son vistas del diseño V2 suministrado por el proyecto.*
+
+## Lo que podés explorar
+
+- **Carrusel de barrios:** flechas, miniaturas, teclado y gestos táctiles; sin avance automático.
+- **Cuatro páginas de barrio:** fotografías, proceso gráfico, paletas, lugares y productos.
+- **Franja en movimiento:** recorrido continuo de derecha a izquierda, con dos bloques idénticos que forman un bucle sin cortes.
+- **Sobre Retazos:** composición renovada con las postales y los recortes del diseño V2.
+- **Instagram conectado:** el usuario, las fotos del mosaico, el pie y las consultas de productos abren **@retazos_ar**.
+- **Diseño adaptable:** composición de escritorio y disposición específica para tablet y celular, con navegación móvil y lugares que se pueden deslizar.
+- **Accesibilidad:** HTML semántico, textos alternativos, foco visible, enlace para saltar al contenido y menú con estado anunciado.
+
+## Hecho con
+
+**HTML5 · CSS3 · JavaScript**. Sin dependencias, instalación ni compilación. Imágenes WebP y SVG; tipografías Cairo y Brasilero 2018 Free incluidas en el proyecto.
+
+```text
+Retazos/
+├── index.html              Inicio y Edición CABA
+├── la-boca.html            Recorrido de La Boca
+├── palermo.html            Recorrido de Palermo
+├── san-telmo.html          Recorrido de San Telmo
+├── caballito.html          Recorrido de Caballito
+├── css/
+│   ├── estilos.css         Identidad, inicio y navegación
+│   ├── recortes.css        Máscaras de papel rasgado
+│   ├── actualizacion.css   Ajustes del inicio V2
+│   └── barrios.css         Componentes de los cuatro recorridos
+├── js/main.js              Carrusel, menú y validación del formulario
+├── img/                    Recursos visuales y piezas V2 en WebP
+└── fuentes/                Fuentes locales y sus archivos de licencia
+```
+
+## Abrir el proyecto
+
+1. Descargá el repositorio o clonalo.
+2. Abrí **index.html** en un navegador actualizado.
+3. Para publicarlo, usá la raíz del repositorio como sitio estático en Vercel o GitHub Pages. No requiere comando de construcción.
+
+Los textos se editan en cada HTML. Los estilos de los barrios están centralizados en **css/barrios.css**; el menú, el carrusel y el formulario comparten **js/main.js**. La duración de la franja se ajusta en la animación **franja-scroll** de **css/estilos.css**.
+
+## Alcance de esta versión
+
+La tienda presenta la colección y deriva las consultas a Instagram. No incluye carrito, pagos ni inventario conectado. El formulario de novedades valida el correo localmente y aún necesita un servicio de envío; no guarda ni transmite direcciones. Algunas fotografías de lugares están pendientes en la entrega de diseño y se representan con sus tramas, sin sustituirlas por fotos ajenas.
+
+Con la preferencia de movimiento reducido se desactivan las transiciones y el desplazamiento suave. La franja conserva el movimiento continuo solicitado para esta versión.
 
 ---
 
-## Verla en tu computadora
-
-Doble clic en `index.html`. Funciona en Chrome, Safari, Firefox y Edge actualizados.
-
-> Si abrís la consola del navegador vas a ver un aviso sobre la "precarga" de las fuentes: pasa solo al abrir el archivo directo desde la compu. Publicada no aparece y la página se ve igual.
-
-
-## Cómo está hecha (para editar)
-
-```
-index.html          estructura y textos de toda la página
-css/estilos.css     colores, tipografías, desktop y responsive
-css/recortes.css    bordes rasgados de las fotos (generado desde las máscaras de la maqueta)
-js/main.js          carrusel, menú del celular y formulario
-img/                imágenes por sección (WebP y SVG)
-fuentes/            Cairo (licencia OFL) y Brasilero 2018 Free
-```
-
-- **Textos:** se editan directo en `index.html`. Cada texto tiene en su `style` la posición de la maqueta (`--x`, `--y`, en px de la mesa de 1440). Si un texto cambia de largo, en escritorio queda en el mismo punto de partida; en celular fluye solo.
-- **Posiciones:** `--x`, `--y`, `--w`, `--h` y `--r` (giro en grados) son las medidas de la maqueta, relativas al borde superior de cada sección. Mover algo 10 px en la maqueta = sumarle 10 al número.
-- **Colores:** variables al principio de `css/estilos.css` (`--rosa`, `--amarillo`, `--marron`, etc.), iguales a `tokens.css` de la entrega.
-- **Fotos:** son las que están incrustadas en la maqueta, con el mismo tratamiento, exportadas a WebP. Las máscaras de retazo están en `css/recortes.css`; no hace falta tocarlas.
-
-### Interacciones
-
-- **Carrusel de barrios:** flechas, clic en las miniaturas, clic en un slide vecino, teclas ← → y deslizar con el dedo. Da la vuelta (de Caballito pasa a La Boca). Sin autoplay.
-- **Links del pie "La Boca / Palermo / San Telmo / Caballito":** bajan al carrusel y muestran ese barrio.
-- **Menú del celular:** botón de tres líneas, se cierra con Esc o al elegir una sección.
-- **Franja "llevate un rincón del barrio":** se desplaza de derecha a izquierda de forma continua en escritorio, tablet y celular. Dos bloques idénticos completan un bucle sin cortes cada 40 s. No se pausa al pasar el cursor. La velocidad se cambia en `css/estilos.css`, en `.franja-pista` y la animación `franja-scroll`.
-- **Libretas del hero (solo PC):** las de La Boca y Palermo se levantan y se inclinan un poco al pasar el cursor. Se ajusta en `css/estilos.css`, en las reglas `.hero-libreta`.
-- **Newsletter:** valida el mail al enviar y muestra la confirmación en el lugar del formulario. **Todavía no envía datos a ningún lado** (ver "A definir").
-- **Movimiento reducido:** se desactivan las transiciones, el desplazamiento suave y el movimiento de las libretas. La franja mantiene su desplazamiento continuo, según el diseño solicitado.
-
----
-
-## Lo que agregué porque faltaba en la maqueta
-
-La entrega marcaba estas piezas como faltantes. Las completé con el mismo sistema para que el carrusel funcione con los cuatro barrios:
-
-| Qué | Cómo lo resolví |
-|---|---|
-| **Slide de San Telmo** | Misma estructura que La Boca (el borde blanco rasgado y la máscara están girados 180° para que no se repita el dibujo). Foto: esquina de Plaza Dorrego, con el tratamiento "película" recreado a partir de las otras fotos tratadas. |
-| **Color del slide de San Telmo** | Terracota de la tapa de San Telmo (es el 53 % de la tapa). Ver abajo. |
-| **Elemento de Palermo y de San Telmo** | Puntos (Palermo) y toldo (San Telmo) de la propuesta anterior del sistema, que venían en la entrega como opción. Solo se ven al pasar a esos barrios. |
-| **Nombre del slide de Caballito** | Agregado "caballito" en Brasilero, blanco, igual que los otros. |
-| **Mensajes del formulario** | Error: "Revisá el mail: parece que le falta algo." Confirmación: "¡Listo! Te avisamos cuando salga la próxima edición." Se cambian en `js/main.js`. |
-
-### Color nuevo: San Telmo · fondo slide
-
-| Formato | Valor |
-|---|---|
-| HEX | **#A54C24** |
-| RGB | 165, 76, 36 |
-| HSB | 19°, 78 %, 65 % |
-| CMYK | 7, 73, 92, 36 (Coated FOGRA39, la misma conversión que dan La Boca, Palermo y Caballito en la paleta de la entrega) |
-| Contraste con texto blanco | 5,7 : 1 (pasa AA) |
-
-Colores de los elementos agregados (vienen de la propuesta anterior): puntos de Palermo **#AD67A0** (RGB 173, 103, 160 · CMYK 30, 67, 0, 13) y toldo de San Telmo **#A9BCAF** (RGB 169, 188, 175 · CMYK 40, 17, 33, 2).
-
-Si preferís sacar los elementos agregados de Palermo y San Telmo, borrá en `index.html` las dos líneas `<img ... src="img/barrios/elemento-palermo.svg">` y `elemento-san-telmo.svg`.
-
+<p align="center"><a href="https://retazoscaba.vercel.app/">Recorré Retazos</a> · <a href="https://www.instagram.com/retazos_ar/">Encontranos en Instagram</a><br><em>Un barrio también se puede llevar en papel.</em></p>
