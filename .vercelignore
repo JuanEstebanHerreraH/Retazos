@@ -1,0 +1,18 @@
+# Publicación manual desde una copia completa: incluir img/ y fuentes/.
+# La lista es independiente de .gitignore.
+.git/
+.vercel/
+.github/
+.codex/
+node_modules/
+__pycache__/
+.env
+.env.*
+*.bundle
+*.bak
+*.log
+*.zip
+*.rar
+*.7z
+*.pdf
+README.md

@@ -1,87 +1,81 @@
-<p align="center">
-  <img src="img/comun/logo-retazos.svg" width="240" alt="Retazos">
-</p>
+# Retazos · Edición CABA
 
-<h1 align="center">Llevate un rincón del barrio</h1>
+**Llevate un rincón del barrio.** Papelería con los colores, las texturas y las historias de Buenos Aires.
 
-<p align="center">Papelería con los colores, las texturas y las historias de Buenos Aires.<br>Edición CABA · La Boca · Palermo · San Telmo · Caballito</p>
+[Visitar la web](https://retazoscaba.vercel.app/) · [Instagram @retazos_ar](https://www.instagram.com/retazos_ar/)
 
-<p align="center">
-  <a href="https://retazoscaba.vercel.app/">Ver la web</a> ·
-  <a href="https://www.instagram.com/retazos_ar/">@retazos_ar</a> ·
-  <a href="#recorrer-los-barrios">Recorrer los barrios</a> ·
-  <a href="#abrir-el-proyecto">Abrir el proyecto</a>
-</p>
+## El proyecto
 
-![Identidad visual de Retazos: papeles rasgados, casas de colores y libretas de barrio](img/v2-preview-inicio.webp)
+Retazos transforma recorridos, fachadas, carteles y detalles de la ciudad en libretas, kits de retazos, totes y un pasaporte para coleccionar barrios. La web presenta la colección y conecta los recorridos de La Boca, Palermo, San Telmo y Caballito.
 
-## Una ciudad, cuatro formas de llevarla con vos
+**Diseño e identidad visual:** [Evelin Standke](https://www.linkedin.com/in/evelin-standke-624773318/).  
+**Desarrollo web:** [Juan Esteban Herrera Herrera](https://github.com/JuanEstebanHerreraH).
 
-Retazos transforma recorridos, fachadas, carteles y detalles de la ciudad en libretas, kits de retazos, totes y un pasaporte para coleccionar barrios. La web conserva esa identidad de collage con fotografías, sellos, cintas y bordes de papel.
+## Recorrer la edición
 
-**Diseño e identidad visual:** Evelin Standke.  — [Linkedin](https://www.linkedin.com/in/evelin-standke-624773318/).
+| Barrio | Recorrido |
+|---|---|
+| [La Boca](https://retazoscaba.vercel.app/la-boca.html) | Chapas de colores que se ven desde el puerto. |
+| [Palermo](https://retazoscaba.vercel.app/palermo.html) | Jacarandás, parques y un planetario a la vuelta. |
+| [San Telmo](https://retazoscaba.vercel.app/san-telmo.html) | Toldos, adoquines y casas que guardan historia. |
+| [Caballito](https://retazoscaba.vercel.app/caballito.html) | El barrio del canje, la veleta y el tranvía. |
 
-**Desarrollo web:** Juan Esteban Herrera Herrera — [GitHub](https://github.com/JuanEstebanHerreraH).
+Cada botón **Ver barrio** abre su recorrido: del barrio al papel, la paleta de colores, los lugares para conocer y los productos. El pie y **Seguí recorriendo** enlazan las cuatro páginas.
 
-## Recorrer los barrios
+## Código público y recursos visuales
 
-Cada botón **Ver barrio** abre una página con su historia visual: de la calle a la trama y a la tapa, su paleta de colores, tres lugares para recorrer y los productos de la colección. El pie de página y la sección **Seguí recorriendo** conectan los cuatro recorridos.
+Este repositorio contiene el código HTML, CSS y JavaScript y su documentación. Las fotografías, ilustraciones, vectores, logos, tipografías, archivos de diseño y vistas de referencia se conservan por separado y están excluidos mediante `.gitignore`. El README tampoco incorpora imágenes de la marca.
 
-| La Boca | Palermo |
-|:---:|:---:|
-| [![La Boca](img/v2-preview-la-boca.webp)](https://retazoscaba.vercel.app/la-boca.html) | [![Palermo](img/v2-preview-palermo.webp)](https://retazoscaba.vercel.app/palermo.html) |
-| Chapas de colores que se ven desde el puerto. | Jacarandás, parques y un planetario a la vuelta. |
-| **San Telmo** | **Caballito** |
-| [![San Telmo](img/v2-preview-san-telmo.webp)](https://retazoscaba.vercel.app/san-telmo.html) | [![Caballito](img/v2-preview-caballito.webp)](https://retazoscaba.vercel.app/caballito.html) |
-| Toldos, adoquines y casas que guardan historia. | El barrio del canje, la veleta y el tranvía. |
+La web publicada mantiene sus imágenes y su diseño. Una descarga de este repositorio contiene únicamente el código: para reproducir la web completa es necesario disponer de la copia autorizada de `img/` y `fuentes/`, con sus rutas y licencias originales. No se sustituyen esas piezas por imágenes ajenas.
 
-*Las imágenes de esta documentación son vistas del diseño V2 suministrado por el proyecto.*
+## Funcionalidades
 
-## Lo que podés explorar
+- Carrusel de barrios con flechas, miniaturas, teclado y gestos táctiles.
+- Cuatro recorridos con proceso gráfico, paletas, lugares y productos.
+- Franja continua de derecha a izquierda, sin cortes entre vueltas.
+- Sección Sobre Retazos y accesos a Instagram desde el usuario, las fotografías y las consultas de productos.
+- Disposición para escritorio, tablet y celular, con menú móvil.
+- HTML semántico, textos alternativos, foco visible y enlace para saltar al contenido.
 
-- **Carrusel de barrios:** flechas, miniaturas, teclado y gestos táctiles; sin avance automático.
-- **Cuatro páginas de barrio:** fotografías, proceso gráfico, paletas, lugares y productos.
-- **Franja en movimiento:** recorrido continuo de derecha a izquierda, con dos bloques idénticos que forman un bucle sin cortes.
-- **Sobre Retazos:** composición renovada con las postales y los recortes del diseño V2.
-- **Instagram conectado:** el usuario, las fotos del mosaico, el pie y las consultas de productos abren **@retazos_ar**.
-- **Diseño adaptable:** composición de escritorio y disposición específica para tablet y celular, con navegación móvil y lugares que se pueden deslizar.
-- **Accesibilidad:** HTML semántico, textos alternativos, foco visible, enlace para saltar al contenido y menú con estado anunciado.
-
-## Hecho con
-
-**HTML5 · CSS3 · JavaScript**. Sin dependencias, instalación ni compilación. Imágenes WebP y SVG; tipografías Cairo y Brasilero 2018 Free incluidas en el proyecto.
+## Estructura
 
 ```text
 Retazos/
-├── index.html              Inicio y Edición CABA
-├── la-boca.html            Recorrido de La Boca
-├── palermo.html            Recorrido de Palermo
-├── san-telmo.html          Recorrido de San Telmo
-├── caballito.html          Recorrido de Caballito
+├── index.html
+├── la-boca.html
+├── palermo.html
+├── san-telmo.html
+├── caballito.html
 ├── css/
-│   ├── estilos.css         Identidad, inicio y navegación
-│   ├── recortes.css        Máscaras de papel rasgado
-│   ├── actualizacion.css   Ajustes del inicio V2
-│   └── barrios.css         Componentes de los cuatro recorridos
-├── js/main.js              Carrusel, menú y validación del formulario
-├── img/                    Recursos visuales y piezas V2 en WebP
-└── fuentes/                Fuentes locales y sus archivos de licencia
+│   ├── estilos.css
+│   ├── recortes.css
+│   ├── actualizacion.css
+│   └── barrios.css
+├── js/main.js
+├── .gitignore
+├── .vercelignore
+└── vercel.json
 ```
 
-## Abrir el proyecto
+**HTML5 · CSS3 · JavaScript**, sin dependencias de aplicación ni compilación. Los textos se editan en cada HTML; los estilos de los barrios se comparten en `css/barrios.css` y las interacciones en `js/main.js`.
 
-1. Descargá el repositorio o clonalo.
-2. Abrí **index.html** en un navegador actualizado.
-3. Para publicarlo, usá la raíz del repositorio como sitio estático en Vercel o GitHub Pages. No requiere comando de construcción.
+## Trabajar con la copia completa
 
-Los textos se editan en cada HTML. Los estilos de los barrios están centralizados en **css/barrios.css**; el menú, el carrusel y el formulario comparten **js/main.js**. La duración de la franja se ajusta en la animación **franja-scroll** de **css/estilos.css**.
+1. Cloná el código y obtené los recursos visuales por el canal autorizado del proyecto.
+2. Colocá `img/` y `fuentes/` en la raíz, respetando los nombres existentes.
+3. Abrí `index.html` o usá un servidor estático local.
+4. Antes de publicar cambios, comprobá que las imágenes y las fuentes estén presentes.
 
-## Alcance de esta versión
+Los recursos siguen en el disco local, pero Git los ignora. No uses `git add -f` sobre ellos ni subas archivos comprimidos que los contengan.
 
-La tienda presenta la colección y deriva las consultas a Instagram. No incluye carrito, pagos ni inventario conectado. El formulario de novedades valida el correo localmente y aún necesita un servicio de envío; no guarda ni transmite direcciones. Algunas fotografías de lugares están pendientes en la entrega de diseño y se representan con sus tramas, sin sustituirlas por fotos ajenas.
+## Publicación
+
+Los cambios de este repositorio no generan despliegues automáticos en Vercel: `vercel.json` los desactiva para evitar reemplazar la web completa con una copia sin imágenes. La publicación se hace manualmente desde una carpeta completa y autorizada, mediante Vercel CLI, en el proyecto existente **retazoscaba**. `.vercelignore` permite incluir los recursos locales y excluye configuración local, credenciales y copias de seguridad.
+
+GitHub Pages usa publicación mediante Actions; no hay un flujo automático que vuelva a publicar este código sin sus recursos. Las publicaciones existentes se conservan.
+
+## Alcance
+
+La tienda deriva las consultas a Instagram; no incluye pagos ni inventario conectado. El formulario de novedades valida el correo localmente y aún necesita un servicio de envío: no guarda ni transmite direcciones. Los lugares sin fotografía en la entrega original conservan sus tramas.
 
 Con la preferencia de movimiento reducido se desactivan las transiciones y el desplazamiento suave. La franja conserva el movimiento continuo solicitado para esta versión.
-
----
-
-<p align="center"><a href="https://retazoscaba.vercel.app/">Recorré Retazos</a> · <a href="https://www.instagram.com/retazos_ar/">Encontranos en Instagram</a><br><em>Un barrio también se puede llevar en papel.</em></p>
