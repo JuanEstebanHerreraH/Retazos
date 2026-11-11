@@ -10,6 +10,29 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  /* Evita la extracción casual por arrastre y el menú de guardar imágenes.
+     No sustituye el control de acceso: una imagen pública sigue siendo accesible.
+     Los clics, el teclado y los gestos táctiles del carrusel se conservan. */
+  Array.prototype.forEach.call(document.images, function (imagen) {
+    imagen.draggable = false;
+    var enlace = imagen.closest('a');
+    if (enlace) { enlace.draggable = false; }
+  });
+  document.addEventListener('dragstart', function (e) {
+    var objetivo = e.target;
+    if (!objetivo || objetivo.nodeType !== 1) { return; }
+    var enlace = objetivo.closest('a');
+    if (objetivo.closest('img, picture') || (enlace && enlace.querySelector('img, picture'))) {
+      e.preventDefault();
+    }
+  }, true);
+  document.addEventListener('contextmenu', function (e) {
+    var objetivo = e.target;
+    if (objetivo && objetivo.nodeType === 1 && objetivo.closest('img, picture')) {
+      e.preventDefault();
+    }
+  }, true);
+
   /* ---------------------------------------------------------
      Carrusel de barrios
      Orden: La Boca, Palermo, San Telmo, Caballito (en bucle).
