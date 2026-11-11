@@ -38,10 +38,10 @@ fuentes/            Cairo (licencia OFL) y Brasilero 2018 Free
 - **Carrusel de barrios:** flechas, clic en las miniaturas, clic en un slide vecino, teclas ← → y deslizar con el dedo. Da la vuelta (de Caballito pasa a La Boca). Sin autoplay.
 - **Links del pie "La Boca / Palermo / San Telmo / Caballito":** bajan al carrusel y muestran ese barrio.
 - **Menú del celular:** botón de tres líneas, se cierra con Esc o al elegir una sección.
-- **Franja "llevate un rincón del barrio" (solo PC):** corre despacio hacia la izquierda, en bucle sin cortes (un ciclo cada 40 s). Se frena al pasar el mouse por encima. La velocidad se cambia en `css/estilos.css` (la animación `franja-scroll`, en el bloque de escritorio).
+- **Franja "llevate un rincón del barrio":** se desplaza de derecha a izquierda de forma continua en escritorio, tablet y celular. Dos bloques idénticos completan un bucle sin cortes cada 40 s. No se pausa al pasar el cursor. La velocidad se cambia en `css/estilos.css`, en `.franja-pista` y la animación `franja-scroll`.
 - **Libretas del hero (solo PC):** las de La Boca y Palermo se levantan y se inclinan un poco al pasar el cursor. Se ajusta en `css/estilos.css`, en las reglas `.hero-libreta`.
 - **Newsletter:** valida el mail al enviar y muestra la confirmación en el lugar del formulario. **Todavía no envía datos a ningún lado** (ver "A definir").
-- **Movimiento reducido:** si la persona lo pide en su sistema (ajuste del navegador o del teléfono), se apagan todas las animaciones, incluida la franja y el movimiento de las libretas.
+- **Movimiento reducido:** se desactivan las transiciones, el desplazamiento suave y el movimiento de las libretas. La franja mantiene su desplazamiento continuo, según el diseño solicitado.
 
 ---
 
