@@ -1,0 +1,104 @@
+name: Retirar recursos visuales del historial
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_head:
+        description: Commit completo revisado antes de la limpieza
+        required: true
+        type: string
+      publish:
+        description: Publicar la limpieza del historial (false solo muestra la vista previa)
+        required: true
+        default: false
+        type: boolean
+      confirmation:
+        description: Para publicar, escribir BORRAR-RECURSOS
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: retazos-limpieza-recursos
+  cancel-in-progress: false
+
+jobs:
+  limpiar:
+    if: github.repository == 'JuanEstebanHerreraH/Retazos' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+      - name: Preparar herramienta
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir git-filter-repo==2.47.0
+      - name: Verificar, limpiar y publicar solo si fue confirmado
+        env:
+          EXPECTED_HEAD: ${{ inputs.expected_head }}
+          PUBLISH: ${{ inputs.publish }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        shell: python
+        run: |
+          import os, re, json, subprocess, hashlib
+          from pathlib import Path
+          
+          REPOSITORY = 'JuanEstebanHerreraH/Retazos'
+          PATTERN = '(?i)(?:^|/)(?:img|images|assets|fuentes|fonts|designs?|diseños?|disenos?|maquetas?|mockups?|screenshots?|previews?|referencias?|resources?)/|\\.(?:svgz?|png|jpe?g|webp|gif|avif|ico|bmp|tiff?|heic|heif|eps|psd|ai|fig|sketch|xd|afdesign|afphoto|xcf|procreate|blend|pdf|zip|rar|7z|tar|gz|woff2?|ttf|otf|eot|mp4|mov|webm|m4v|mp3|wav|ogg)$'
+          CONFIG = {'.gitignore': '# Los recursos visuales se conservan fuera del repositorio público.\n/img/\n/images/\n/assets/\n/fuentes/\n/fonts/\n/design/\n/designs/\n/diseno/\n/disenos/\n/diseño/\n/diseños/\n/maqueta/\n/maquetas/\n/mockups/\n/screenshots/\n/previews/\n/referencias/\n\n# Imágenes, vectores, originales de diseño y medios en cualquier carpeta.\n*.[sS][vV][gG]\n*.[sS][vV][gG][zZ]\n*.[pP][nN][gG]\n*.[jJ][pP][gG]\n*.[jJ][pP][eE][gG]\n*.[wW][eE][bB][pP]\n*.[gG][iI][fF]\n*.[aA][vV][iI][fF]\n*.[iI][cC][oO]\n*.[bB][mM][pP]\n*.[tT][iI][fF]\n*.[tT][iI][fF][fF]\n*.[hH][eE][iI][cC]\n*.[hH][eE][iI][fF]\n*.[eE][pP][sS]\n*.[pP][sS][dD]\n*.[aA][iI]\n*.[fF][iI][gG]\n*.[sS][kK][eE][tT][cC][hH]\n*.[xX][dD]\n*.[aA][fF][dD][eE][sS][iI][gG][nN]\n*.[aA][fF][pP][hH][oO][tT][oO]\n*.[xX][cC][fF]\n*.[pP][rR][oO][cC][rR][eE][aA][tT][eE]\n*.[bB][lL][eE][nN][dD]\n*.[pP][dD][fF]\n*.[zZ][iI][pP]\n*.[rR][aA][rR]\n*.7z\n*.[tT][aA][rR]\n*.[gG][zZ]\n*.[wW][oO][fF][fF]\n*.[wW][oO][fF][fF]2\n*.[tT][tT][fF]\n*.[oO][tT][fF]\n*.[eE][oO][tT]\n*.[mM][pP]4\n*.[mM][oO][vV]\n*.[wW][eE][bB][mM]\n*.[mM]4[vV]\n*.[mM][pP]3\n*.[wW][aA][vV]\n*.[oO][gG][gG]\n\n# Configuración local, credenciales, dependencias y copias de seguridad.\n.env\n.env.*\n!.env.example\n.vercel/\n.codex/\nnode_modules/\n__pycache__/\n*.pyc\n*.log\n*.bundle\n*.bak\n.DS_Store\nThumbs.db\n', '.vercelignore': '# Publicación manual desde una copia completa: incluir img/ y fuentes/.\n# La lista es independiente de .gitignore.\n.git/\n.vercel/\n.github/\n.codex/\nnode_modules/\n__pycache__/\n.env\n.env.*\n*.bundle\n*.bak\n*.log\n*.zip\n*.rar\n*.7z\n*.pdf\nREADME.md\n', 'vercel.json': '{\n  "$schema": "https://openapi.vercel.sh/vercel.json",\n  "git": {\n    "deploymentEnabled": false\n  }\n}\n', 'README.md': '# Retazos · Edición CABA\n\n**Llevate un rincón del barrio.** Papelería con los colores, las texturas y las historias de Buenos Aires.\n\n[Visitar la web](https://retazoscaba.vercel.app/) · [Instagram @retazos_ar](https://www.instagram.com/retazos_ar/)\n\n## El proyecto\n\nRetazos transforma recorridos, fachadas, carteles y detalles de la ciudad en libretas, kits de retazos, totes y un pasaporte para coleccionar barrios. La web presenta la colección y conecta los recorridos de La Boca, Palermo, San Telmo y Caballito.\n\n**Diseño e identidad visual:** [Evelin Standke](https://www.linkedin.com/in/evelin-standke-624773318/).  \n**Desarrollo web:** [Juan Esteban Herrera Herrera](https://github.com/JuanEstebanHerreraH).\n\n## Recorrer la edición\n\n| Barrio | Recorrido |\n|---|---|\n| [La Boca](https://retazoscaba.vercel.app/la-boca.html) | Chapas de colores que se ven desde el puerto. |\n| [Palermo](https://retazoscaba.vercel.app/palermo.html) | Jacarandás, parques y un planetario a la vuelta. |\n| [San Telmo](https://retazoscaba.vercel.app/san-telmo.html) | Toldos, adoquines y casas que guardan historia. |\n| [Caballito](https://retazoscaba.vercel.app/caballito.html) | El barrio del canje, la veleta y el tranvía. |\n\nCada botón **Ver barrio** abre su recorrido: del barrio al papel, la paleta de colores, los lugares para conocer y los productos. El pie y **Seguí recorriendo** enlazan las cuatro páginas.\n\n## Código público y recursos visuales\n\nEste repositorio contiene el código HTML, CSS y JavaScript y su documentación. Las fotografías, ilustraciones, vectores, logos, tipografías, archivos de diseño y vistas de referencia se conservan por separado y están excluidos mediante `.gitignore`. El README tampoco incorpora imágenes de la marca.\n\nLa web publicada mantiene sus imágenes y su diseño. Una descarga de este repositorio contiene únicamente el código: para reproducir la web completa es necesario disponer de la copia autorizada de `img/` y `fuentes/`, con sus rutas y licencias originales. No se sustituyen esas piezas por imágenes ajenas.\n\n## Funcionalidades\n\n- Carrusel de barrios con flechas, miniaturas, teclado y gestos táctiles.\n- Cuatro recorridos con proceso gráfico, paletas, lugares y productos.\n- Franja continua de derecha a izquierda, sin cortes entre vueltas.\n- Sección Sobre Retazos y accesos a Instagram desde el usuario, las fotografías y las consultas de productos.\n- Disposición para escritorio, tablet y celular, con menú móvil.\n- HTML semántico, textos alternativos, foco visible y enlace para saltar al contenido.\n\n## Estructura\n\n```text\nRetazos/\n├── index.html\n├── la-boca.html\n├── palermo.html\n├── san-telmo.html\n├── caballito.html\n├── css/\n│   ├── estilos.css\n│   ├── recortes.css\n│   ├── actualizacion.css\n│   └── barrios.css\n├── js/main.js\n├── .gitignore\n├── .vercelignore\n└── vercel.json\n```\n\n**HTML5 · CSS3 · JavaScript**, sin dependencias de aplicación ni compilación. Los textos se editan en cada HTML; los estilos de los barrios se comparten en `css/barrios.css` y las interacciones en `js/main.js`.\n\n## Trabajar con la copia completa\n\n1. Cloná el código y obtené los recursos visuales por el canal autorizado del proyecto.\n2. Colocá `img/` y `fuentes/` en la raíz, respetando los nombres existentes.\n3. Abrí `index.html` o usá un servidor estático local.\n4. Antes de publicar cambios, comprobá que las imágenes y las fuentes estén presentes.\n\nLos recursos siguen en el disco local, pero Git los ignora. No uses `git add -f` sobre ellos ni subas archivos comprimidos que los contengan.\n\n## Publicación\n\nLos cambios de este repositorio no generan despliegues automáticos en Vercel: `vercel.json` los desactiva para evitar reemplazar la web completa con una copia sin imágenes. La publicación se hace manualmente desde una carpeta completa y autorizada, mediante Vercel CLI, en el proyecto existente **retazoscaba**. `.vercelignore` permite incluir los recursos locales y excluye configuración local, credenciales y copias de seguridad.\n\nGitHub Pages usa publicación mediante Actions; no hay un flujo automático que vuelva a publicar este código sin sus recursos. Las publicaciones existentes se conservan.\n\n## Alcance\n\nLa tienda deriva las consultas a Instagram; no incluye pagos ni inventario conectado. El formulario de novedades valida el correo localmente y aún necesita un servicio de envío: no guarda ni transmite direcciones. Los lugares sin fotografía en la entrega original conservan sus tramas.\n\nCon la preferencia de movimiento reducido se desactivan las transiciones y el desplazamiento suave. La franja conserva el movimiento continuo solicitado para esta versión.\n'}
+          def git(*args):
+              return subprocess.check_output(['git','-c','core.quotepath=false',*args],text=True).strip()
+          def run(*args):
+              subprocess.run(args,check=True)
+          def asset(path): return bool(re.search(PATTERN,path))
+          def paths():
+              return [line.partition(' ')[2] for line in git('rev-list','--objects','--all').splitlines() if ' ' in line]
+          def code_hashes():
+              return {p:git('rev-parse','HEAD:'+p) for p in git('ls-tree','-r','--name-only','HEAD').splitlines() if p.endswith(('.html','.css','.js'))}
+          
+          publish=os.environ.get('PUBLISH','false')=='true'
+          expected=os.environ['EXPECTED_HEAD']
+          if not re.fullmatch('[0-9a-f]{40}',expected): raise SystemExit('Se necesita la revisión completa que fue revisada.')
+          if os.environ.get('GITHUB_REPOSITORY',REPOSITORY)!=REPOSITORY: raise SystemExit('Repositorio fuera de alcance.')
+          if publish and os.environ.get('CONFIRMATION')!='BORRAR-RECURSOS': raise SystemExit('Falta confirmar la publicación de la limpieza.')
+          if git('rev-parse','HEAD')!=expected: raise SystemExit('La revisión cambió; revisá los cambios antes de continuar.')
+          heads=git('for-each-ref','--format=%(refname)','refs/heads','refs/tags').splitlines()
+          if heads!=['refs/heads/main']: raise SystemExit('Hay otras ramas o etiquetas: se requiere revisar su alcance.')
+          remotes=git('for-each-ref','--format=%(refname)','refs/remotes').splitlines()
+          if any(p not in ('refs/remotes/origin/main','refs/remotes/origin/HEAD') for p in remotes):
+              raise SystemExit('Se encontraron ramas remotas adicionales: la limpieza no se publica.')
+          before=code_hashes()
+          before_count=int(git('rev-list','--count','HEAD'))
+          removed=sorted({p for p in paths() if asset(p)})
+          run('git','filter-repo','--force','--invert-paths','--path-regex',PATTERN)
+          for name,content in CONFIG.items(): Path(name).write_text(content,encoding='utf-8')
+          run('git','add','--','.gitignore','.vercelignore','vercel.json','README.md')
+          if subprocess.run(['git','diff','--cached','--quiet']).returncode:
+              run('git','-c','user.name=github-actions[bot]','-c','user.email=41898282+github-actions[bot]@users.noreply.github.com',
+                  'commit','-m','Conserva solo código y excluye recursos visuales [skip ci]')
+          if code_hashes()!=before: raise SystemExit('El código de la web cambió; se cancela la publicación.')
+          remaining=[p for p in paths() if asset(p)]
+          if remaining: raise SystemExit('Quedan recursos visuales en el historial; se cancela la publicación.')
+          if re.search(r'<img\b|!\[',Path('README.md').read_text(encoding='utf-8'),re.I):
+              raise SystemExit('Quedan imágenes en el README; se cancela la publicación.')
+          if json.loads(Path('vercel.json').read_text())['git']['deploymentEnabled'] is not False:
+              raise SystemExit('No está protegido el despliegue existente.')
+          if git('status','--porcelain'): raise SystemExit('La copia tiene cambios sin registrar.')
+          report={'revisiones_originales':before_count,'revisiones_resultantes':int(git('rev-list','--count','HEAD')),
+                  'rutas_visuales_retiradas':len(removed),'recursos_visuales_restantes_en_historial':len(remaining),
+                  'codigo_web_identico':True,'archivos_finales':git('ls-tree','-r','--name-only','HEAD').splitlines(),
+                  'nuevo_commit':git('rev-parse','HEAD'),'publicado':False}
+          if publish:
+              run('git','remote','add','origin','https://github.com/'+REPOSITORY+'.git')
+              run('git','push','--force-with-lease=refs/heads/main:'+expected,'origin','HEAD:refs/heads/main')
+              report['publicado']=True
+          output=json.dumps(report,ensure_ascii=False,indent=2)
+          print(output)
+          Path('resultado-limpieza.json').write_text(output,encoding='utf-8')
+          summary=os.environ.get('GITHUB_STEP_SUMMARY')
+          if summary:
+              with open(summary,'a',encoding='utf-8') as f:
+                  f.write('## Limpieza de recursos visuales\n\n'+('**Publicada**' if publish else '**Vista previa, sin cambios remotos**')+'\n\n```json\n'+output+'\n```\n')
