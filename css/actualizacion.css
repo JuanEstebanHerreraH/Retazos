@@ -1,4 +1,11 @@
 /* Ajustes V2 del inicio, compartidos con las páginas de barrio. */
+/* Barrera al arrastre casual. No interfiere con enlaces, zoom o gestos táctiles. */
+img {
+ -webkit-user-drag:none;
+ -webkit-user-select:none;
+ user-select:none;
+ -webkit-touch-callout:none;
+}
 .sobre-circulos { object-fit:contain; pointer-events:none; }
 .mosaico-item { display:block; }
 .mosaico-item:hover .mosaico-foto { filter:brightness(1.06); }
