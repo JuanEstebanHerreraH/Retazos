@@ -2,7 +2,8 @@
    RETAZOS · MOVIMIENTO
    Animaciones de entrada, interacciones y transiciones entre páginas.
    Las clases las pone js/movimiento.js; sin JavaScript todo se ve quieto
-   y completo. Con "reducir movimiento" no se anima nada (salvo la franja).
+   y completo. Con "reducir movimiento" las piezas solo aparecen con un
+   fundido suave: nada se desplaza, flota ni sigue al mouse.
    - .rv          pieza esperando entrar (invisible)
    - .rv-on       pieza entrando (la animación deja el estado final intacto)
    - .rv-t        título partido en palabras o letras
@@ -34,6 +35,7 @@ html.con-movimiento .rv { opacity: 0; }
 .rv-sello  { --rv-anim: rv-sello; --rv-dur: .75s; --rv-dur-op: .25s; --rv-easing: ease-out; }
 .rv-trazo  { --rv-anim: rv-trazo; --rv-dur: .9s; --rv-dur-op: .2s; --rv-easing: cubic-bezier(.6, 0, .3, 1); }
 .rv-trazo.rv-on { animation-composition: replace, replace; }
+.rv-burbuja { --rv-anim: rv-burbuja; --rv-dur: .9s; --rv-dur-op: .3s; --rv-easing: var(--rv-rebote); }
 
 @keyframes rv-aparecer { from { opacity: 0; } }
 @keyframes rv-subir { from { translate: 0 calc(30 * var(--u, 1px)); } }
@@ -51,6 +53,7 @@ html.con-movimiento .rv { opacity: 0; }
   75%  { scale: 1.05; rotate: -1deg; }
   100% { scale: 1;   rotate: 0deg; }
 }
+@keyframes rv-burbuja { from { scale: 0; rotate: -40deg; } }
 @keyframes rv-trazo { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
 /* Piezas que se agrandan o giran desde su centro (no tienen giro propio) */
@@ -64,7 +67,7 @@ html.con-movimiento .rv-t:not(.rv-t-on) .rv-palabra,
 html.con-movimiento .rv-t:not(.rv-t-on) .rv-letra { opacity: 0; }
 .rv-t-on .rv-palabra {
   animation: rv-palabra-op .7s ease-out backwards, rv-palabra 1s var(--rv-curva) backwards;
-  animation-delay: calc(var(--rv-d, 0ms) + var(--i) * 85ms);
+  animation-delay: calc(var(--rv-d, 0ms) + var(--i) * var(--rv-paso, 85ms));
   animation-composition: replace, add;
 }
 .rv-t-on .rv-letra {
@@ -73,7 +76,9 @@ html.con-movimiento .rv-t:not(.rv-t-on) .rv-letra { opacity: 0; }
   animation-composition: replace, add;
 }
 @keyframes rv-palabra-op { from { opacity: 0; filter: blur(6px); } }
-@keyframes rv-palabra { from { translate: 0 .5em; } }
+@keyframes rv-palabra { from { translate: 0 var(--rv-sube, .5em); } }
+/* Textos corridos: las palabras aparecen más rápido y suben menos */
+.rv-t-suave { --rv-paso: 26ms; --rv-sube: .4em; }
 @keyframes rv-letra { from { translate: 0 .55em; rotate: var(--rr, 8deg); scale: .5; } }
 
 /* Las letras grandes saltan al pasar el mouse */
@@ -120,6 +125,74 @@ html.con-movimiento .rv-t:not(.rv-t-on) .rv-letra { opacity: 0; }
   .b-paso-imagen:hover img { scale: 1.04; rotate: -1.5deg; }
 }
 
+/* =========================================================
+   SOBRE RETAZOS · círculos de la versión V2
+   La imagen de círculos trae más círculos que la maqueta V2. En escritorio
+   se reemplaza por los círculos sueltos de .sobre-burbujas (mismo recorte,
+   cada uno animable); en tablet y celular se enmascaran los que sobran.
+   ========================================================= */
+.sobre-circulos {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3034 1734' preserveAspectRatio='none'%3E%3Crect x='227' y='187' width='244' height='294'/%3E%3Crect x='515' y='110' width='255' height='244'/%3E%3Crect x='68' y='484' width='201' height='204'/%3E%3Crect x='113' y='699' width='103' height='109'/%3E%3Crect x='2829' y='324' width='105' height='102'/%3E%3Crect x='2520' y='509' width='398' height='376'/%3E%3Crect x='2686' y='877' width='165' height='167'/%3E%3Crect x='2467' y='1076' width='351' height='351'/%3E%3Crect x='2836' y='1293' width='109' height='109'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3034 1734' preserveAspectRatio='none'%3E%3Crect x='227' y='187' width='244' height='294'/%3E%3Crect x='515' y='110' width='255' height='244'/%3E%3Crect x='68' y='484' width='201' height='204'/%3E%3Crect x='113' y='699' width='103' height='109'/%3E%3Crect x='2829' y='324' width='105' height='102'/%3E%3Crect x='2520' y='509' width='398' height='376'/%3E%3Crect x='2686' y='877' width='165' height='167'/%3E%3Crect x='2467' y='1076' width='351' height='351'/%3E%3Crect x='2836' y='1293' width='109' height='109'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+}
+.sobre-burbujas { display: none; }
+@media (min-width: 1200px) {
+  .sobre-circulos { visibility: hidden; }
+  .sobre-burbujas { display: block; }
+  .burbuja {
+    background: url("../img/v2-sobre-circulos.webp") no-repeat;
+    background-size: calc(1507.68 * var(--u)) calc(858.12 * var(--u));
+    background-position: calc(var(--bx) * -1 * var(--u)) calc(var(--by) * -1 * var(--u));
+    transform-origin: 50% 50%;
+    pointer-events: auto;
+    transition: scale .45s var(--rv-rebote);
+  }
+  .burbuja:hover { scale: 1.12; }
+}
+
+/* =========================================================
+   MÁS VIDA
+   ========================================================= */
+/* Los links con línea: la línea se dibuja cuando el link aparece */
+.link-linea.rv-on::after {
+  transform-origin: 0 50%;
+  animation: rv-linea .6s var(--rv-curva) backwards;
+  animation-delay: calc(var(--rv-d, 0ms) + 250ms);
+}
+@keyframes rv-linea { from { scale: 0 1; } }
+
+/* El "retazos" gigante del pie ondula despacio, letra por letra */
+.t-gigante.rv-t-on.rv-vivo .rv-letra {
+  animation: rv-ola 3.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -.28s);
+  animation-composition: add;
+}
+@keyframes rv-ola { 0%, 100% { translate: 0 0; } 50% { translate: 0 -.045em; } }
+
+/* Cursor: un retazo rosa acompaña al mouse y se agranda sobre lo clickeable */
+.rv-cursor {
+  position: fixed; left: 0; top: 0; z-index: 70;
+  width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+  background: var(--rosa); mix-blend-mode: multiply;
+  pointer-events: none; opacity: 0;
+  transition: opacity .25s, width .3s var(--rv-rebote), height .3s var(--rv-rebote), margin .3s var(--rv-rebote), background-color .25s;
+}
+.rv-cursor.visible { opacity: .85; }
+.rv-cursor.sobre-link { width: 46px; height: 46px; margin: -23px 0 0 -23px; background: var(--amarillo); }
+.rv-cursor.apretado { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+
+/* Botones magnéticos: se acercan un poco al mouse */
+@media (hover: hover) and (min-width: 1200px) {
+  .boton.rv-iman { translate: var(--mx, 0px) var(--my, 0px); }
+  .boton.rv-iman:hover { translate: var(--mx, 0px) calc(var(--my, 0px) - 2 * var(--u)); }
+  .logo { transition: rotate .4s var(--rv-rebote), scale .4s var(--rv-rebote); }
+  .logo:hover { rotate: -4deg; scale: 1.06; }
+  .t-nav { transition: color .2s; }
+  .t-nav:hover { color: var(--marron-claro); }
+  .producto-link:hover .producto-img { rotate: -2deg; }
+  .producto-img { transition: translate var(--t-rapido) var(--curva), rotate .4s var(--rv-rebote); }
+}
+
 /* ---------- Costura de progreso (arriba) ---------- */
 .rv-costura {
   position: fixed; left: 0; top: 0; z-index: 60; width: 100%; height: 4px;
@@ -152,8 +225,16 @@ html.con-movimiento .rv-t:not(.rv-t-on) .rv-letra { opacity: 0; }
 @keyframes rv-pagina-sale { to { opacity: 0; translate: 0 -24px; scale: .985; } }
 @keyframes rv-pagina-entra { from { opacity: 0; translate: 0 36px; } }
 
+/* Con "reducir movimiento": solo fundidos, nada se desplaza */
 @media (prefers-reduced-motion: reduce) {
-  html.rv-cargando .pagina { opacity: 1; }
-  html.con-movimiento .rv { opacity: 1; }
-  .rv-costura, .rv-arriba { transition: none; }
+  html.con-movimiento .rv-on {
+    animation: rv-aparecer .7s ease-out backwards !important;
+    animation-delay: var(--rv-d, 0ms) !important;
+  }
+  html.con-movimiento .rv-t-on .rv-palabra,
+  html.con-movimiento .rv-t-on .rv-letra {
+    animation: rv-palabra-op .6s ease-out backwards !important;
+    animation-delay: calc(var(--rv-d, 0ms) + var(--i) * var(--rv-paso, 70ms)) !important;
+  }
+  .rv-cursor { display: none; }
 }
