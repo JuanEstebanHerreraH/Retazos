@@ -1,0 +1,159 @@
+/* =========================================================
+   RETAZOS · MOVIMIENTO
+   Animaciones de entrada, interacciones y transiciones entre páginas.
+   Las clases las pone js/movimiento.js; sin JavaScript todo se ve quieto
+   y completo. Con "reducir movimiento" no se anima nada (salvo la franja).
+   - .rv          pieza esperando entrar (invisible)
+   - .rv-on       pieza entrando (la animación deja el estado final intacto)
+   - .rv-t        título partido en palabras o letras
+   ========================================================= */
+
+:root {
+  --rv-curva: cubic-bezier(.16, .84, .3, 1);
+  --rv-rebote: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* Mientras se prepara la página no se ve el "salto" de las piezas */
+html.rv-cargando .pagina { opacity: 0; }
+html.con-movimiento .rv { opacity: 0; }
+
+/* ---------- Entrada de piezas ---------- */
+.rv-on {
+  animation:
+    rv-aparecer var(--rv-dur-op, .7s) ease-out backwards,
+    var(--rv-anim, rv-subir) var(--rv-dur, .95s) var(--rv-easing, var(--rv-curva)) backwards;
+  animation-delay: var(--rv-d, 0ms), var(--rv-d, 0ms);
+  animation-composition: replace, add;   /* se suma a la posición/giro que ya tiene */
+}
+.rv-subir  { --rv-anim: rv-subir; }
+.rv-bajar  { --rv-anim: rv-bajar; --rv-dur: .8s; }
+.rv-pegar  { --rv-anim: rv-pegar; --rv-dur: 1.05s; }
+.rv-izq    { --rv-anim: rv-izq; --rv-dur: 1.3s; }
+.rv-der    { --rv-anim: rv-der; --rv-dur: 1.3s; }
+.rv-zoom   { --rv-anim: rv-zoom; --rv-dur: 1.8s; --rv-dur-op: 1s; }
+.rv-sello  { --rv-anim: rv-sello; --rv-dur: .75s; --rv-dur-op: .25s; --rv-easing: ease-out; }
+.rv-trazo  { --rv-anim: rv-trazo; --rv-dur: .9s; --rv-dur-op: .2s; --rv-easing: cubic-bezier(.6, 0, .3, 1); }
+.rv-trazo.rv-on { animation-composition: replace, replace; }
+
+@keyframes rv-aparecer { from { opacity: 0; } }
+@keyframes rv-subir { from { translate: 0 calc(30 * var(--u, 1px)); } }
+@keyframes rv-bajar { from { translate: 0 calc(-18 * var(--u, 1px)); } }
+@keyframes rv-pegar {
+  from { translate: 0 calc(-40 * var(--u, 1px)); scale: 1.07; }
+  70%  { translate: 0 calc(3 * var(--u, 1px)); scale: .995; }
+}
+@keyframes rv-izq { from { translate: calc(-220 * var(--u, 1px)) 0; } }
+@keyframes rv-der { from { translate: calc(220 * var(--u, 1px)) 0; } }
+@keyframes rv-zoom { from { scale: 1.12; } }
+@keyframes rv-sello {
+  0%   { scale: 2.4; rotate: -28deg; }
+  55%  { scale: .9;  rotate: 3deg; }
+  75%  { scale: 1.05; rotate: -1deg; }
+  100% { scale: 1;   rotate: 0deg; }
+}
+@keyframes rv-trazo { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* Piezas que se agrandan o giran desde su centro (no tienen giro propio) */
+.estampilla .sello, .sello, .hero-foto > img, .ferias-foto > img, .mosaico-foto > img, .slide .foto > img:not(.girada),
+.mini-circulo > img { transform-origin: 50% 50%; }
+
+/* ---------- Títulos: palabras y letras que aparecen ---------- */
+.rv-palabra, .rv-letra { display: inline-block; }
+.rv-pal-l { display: inline-block; white-space: nowrap; }
+html.con-movimiento .rv-t:not(.rv-t-on) .rv-palabra,
+html.con-movimiento .rv-t:not(.rv-t-on) .rv-letra { opacity: 0; }
+.rv-t-on .rv-palabra {
+  animation: rv-palabra-op .7s ease-out backwards, rv-palabra 1s var(--rv-curva) backwards;
+  animation-delay: calc(var(--rv-d, 0ms) + var(--i) * 85ms);
+  animation-composition: replace, add;
+}
+.rv-t-on .rv-letra {
+  animation: rv-aparecer .45s ease-out backwards, rv-letra .9s var(--rv-rebote) backwards;
+  animation-delay: calc(var(--rv-d, 0ms) + var(--i) * 55ms);
+  animation-composition: replace, add;
+}
+@keyframes rv-palabra-op { from { opacity: 0; filter: blur(6px); } }
+@keyframes rv-palabra { from { translate: 0 .5em; } }
+@keyframes rv-letra { from { translate: 0 .55em; rotate: var(--rr, 8deg); scale: .5; } }
+
+/* Las letras grandes saltan al pasar el mouse */
+.rv-letra { transition: translate .35s var(--rv-rebote), rotate .35s var(--rv-rebote), color .2s; }
+@media (hover: hover) {
+  .rv-letra:hover { translate: 0 -.12em; rotate: var(--rr, 6deg); }
+  .t-gigante .rv-letra:hover { color: var(--amarillo); }
+}
+
+/* ---------- Interacciones al pasar el mouse ---------- */
+@media (hover: hover) and (min-width: 1200px) {
+  /* Postales y estampillas se levantan como papel; el sello gira */
+  .postal > .a, .estampilla > .a, .ferias-afiche > .a {
+    transition: translate .35s var(--rv-curva);
+  }
+  .postal:hover > .a, .estampilla:hover > .a, .ferias-afiche:hover > .a { translate: 0 calc(-8 * var(--u)); }
+  .estampilla > .sello { transition: translate .35s var(--rv-curva), rotate .5s var(--rv-rebote); }
+  .estampilla:hover > .sello { rotate: -14deg; }
+
+  /* Fotos que se acercan dentro de su recorte */
+  .mosaico-foto > img, .slide .foto > img:not(.girada) { transition: scale .6s var(--rv-curva); }
+  .mosaico-item:hover .mosaico-foto > img, .slide.actual:hover .foto > img:not(.girada) { scale: 1.06; }
+
+  /* Libretas del hero: ya se levantan; la sombra acompaña */
+  .hero-circulo, .ferias-circulo, .ig-circulo { transition: rotate .6s var(--rv-rebote); }
+  .hero-circulo:hover, .ferias-circulo:hover, .ig-circulo:hover { rotate: 12deg; }
+
+  .boton { transition: translate var(--t-rapido) var(--curva), box-shadow var(--t-rapido) var(--curva), background-color .2s; }
+  .boton:hover { background-color: #f4a8c8; }
+}
+
+/* Sección activa en el menú */
+@media (min-width: 1200px) {
+  .t-nav.activo::after { opacity: 1; }
+}
+
+/* Barrios: tarjetas que reaccionan */
+@media (hover: hover) {
+  .b-estampilla { transition: rotate .45s var(--rv-rebote), translate .35s var(--rv-curva), box-shadow .35s; }
+  .b-estampilla:hover { rotate: 0deg; translate: 0 -8px; box-shadow: 9px 12px 0 var(--sombra-15); }
+  .b-muestra { transition: scale .35s var(--rv-rebote), rotate .35s var(--rv-rebote); }
+  .b-paleta li:hover .b-muestra { scale: 1.08; rotate: -4deg; }
+  .b-paso-imagen img { transition: scale .5s var(--rv-curva), rotate .5s var(--rv-curva); }
+  .b-paso-imagen:hover img { scale: 1.04; rotate: -1.5deg; }
+}
+
+/* ---------- Costura de progreso (arriba) ---------- */
+.rv-costura {
+  position: fixed; left: 0; top: 0; z-index: 60; width: 100%; height: 4px;
+  background: repeating-linear-gradient(90deg, var(--marron) 0 12px, transparent 12px 20px);
+  transform: scaleX(var(--p, 0)); transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* ---------- Botón para volver arriba ---------- */
+.rv-arriba {
+  position: fixed; right: clamp(14px, 2.2vw, 34px); bottom: clamp(14px, 2.2vw, 34px); z-index: 55;
+  width: 58px; height: 58px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--amarillo); color: var(--marron);
+  border: 2px solid var(--marron);
+  box-shadow: 3px 4px 0 var(--sombra-18);
+  font-family: var(--f-display); font-size: 30px; line-height: 1; padding-bottom: 4px;
+  opacity: 0; translate: 0 20px; scale: .8; pointer-events: none;
+  transition: opacity .3s, translate .4s var(--rv-rebote), scale .4s var(--rv-rebote), background-color .2s, rotate .4s var(--rv-rebote);
+}
+.rv-arriba.visible { opacity: 1; translate: 0 0; scale: 1; pointer-events: auto; }
+.rv-arriba:hover { background: var(--rosa); rotate: -10deg; }
+
+/* ---------- Transición entre páginas (Chrome, Edge, Safari 18+) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: rv-pagina-sale .35s cubic-bezier(.4, 0, 1, 1) both; }
+  ::view-transition-new(root) { animation: rv-pagina-entra .6s var(--rv-curva) both; }
+}
+@keyframes rv-pagina-sale { to { opacity: 0; translate: 0 -24px; scale: .985; } }
+@keyframes rv-pagina-entra { from { opacity: 0; translate: 0 36px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html.rv-cargando .pagina { opacity: 1; }
+  html.con-movimiento .rv { opacity: 1; }
+  .rv-costura, .rv-arriba { transition: none; }
+}

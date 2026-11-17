@@ -1,0 +1,52 @@
+/* =========================================================
+   RETAZOS · ESCALA EN ESCRITORIO
+   Antes, 1 px de la maqueta (--u) dependía solo del ancho de la ventana:
+   en un monitor de 1920 px todo se agrandaba un 33 % y el inicio no entraba
+   en la pantalla. Ahora --u también mira el alto de la ventana:
+   - la cabecera + el hero (1080 px de maqueta) entran en el alto visible;
+   - nunca baja de 0,75 (los textos chicos siguen legibles);
+   - nunca pasa de 1,1 (en monitores enormes no se infla).
+   La composición queda centrada en una "caja" de 1440 × --u. Las bandas de
+   color, la franja y las fotos de borde a borde se estiran hasta los costados
+   de la ventana para que no se vea un corte.
+   ========================================================= */
+@media (min-width: 1200px) {
+  .pagina {
+    max-width: none;
+    --u: min(calc(100cqw / 1440), clamp(.75px, calc(100svh / 1080), 1.1px));
+    --caja: calc(1440 * var(--u));
+    --sangria: calc((100cqw - var(--caja)) / 2);
+  }
+  .seccion { width: var(--caja); margin-inline: auto; }
+
+  /* Lo que va de borde a borde en la maqueta, sigue yendo de borde a borde */
+  .barra { left: calc(-1 * var(--sangria)); width: 100cqw; }
+  .hero-foto, .ferias-foto {
+    left: calc(var(--x) * var(--u) - var(--sangria));
+    width: calc(var(--w) * var(--u) + 2 * var(--sangria));
+  }
+  /* Las bandas son SVG con proporción fija: se estiran a lo ancho con scale.
+     --estirar (ancho de ventana / ancho de la caja) lo calcula js/movimiento.js */
+  .banda, .franja-fondo { scale: var(--estirar, 1) 1; transform-origin: 50% 50%; }
+  .hero-foto > img, .ferias-foto > img { left: 0; width: 100%; object-fit: cover; }
+  .franja-texto { left: calc(var(--x) * var(--u) - var(--sangria)); }
+
+  /* Los retazos del hero siguen asomando desde los bordes de la ventana */
+  .hero-retazo-rosa, .hero-retazo-celeste { left: calc(var(--x) * var(--u) - var(--sangria)); }
+  .hero-retazo-amarillo, .hero-retazo-marron { left: calc(var(--x) * var(--u) + var(--sangria)); }
+
+  /* Páginas de barrio: el contenido usa la misma caja que el inicio.
+     --bw es "1 % del ancho de la caja" y reemplaza a vw en barrios.css. */
+  .pagina-barrio .b-contenido { width: var(--caja); margin-inline: auto; --bw: calc(var(--caja) / 100); }
+  .pagina-barrio .b-hero,
+  .pagina-barrio .b-franja { margin-inline: calc(-1 * var(--sangria)); }
+  .pagina-barrio .b-hero-tarjeta { width: calc(47 * var(--bw)); }
+  .pagina-barrio .b-hero-circulo { width: calc(14 * var(--bw)); left: calc(50% + 15 * var(--bw)); }
+  .pagina-barrio .b-lugares {
+    margin-inline: calc(-1 * var(--sangria));
+    padding-inline: calc(7.5 * var(--bw) + var(--sangria));
+    border-radius: 0;
+  }
+  .pagina-barrio .b-boton { font-size: clamp(14px, calc(1.05 * var(--bw)), 18px); padding: calc(1.1 * var(--bw)) calc(2.2 * var(--bw)); }
+  .pagina-barrio .b-bajada { max-width: calc(48 * var(--bw)); }
+}

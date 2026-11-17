@@ -31,6 +31,10 @@ La web publicada mantiene sus imágenes y su diseño. Una descarga de este repos
 ## Funcionalidades
 
 - Imágenes sin arrastre nativo y menú contextual de guardado desactivado sobre ellas; los enlaces y gestos del carrusel siguen disponibles.
+- Escala de escritorio que considera el ancho y el alto de la ventana: el inicio entra en pantalla y la composición no se agranda en monitores grandes (`css/escala.css`).
+- Animaciones de entrada por sección: títulos palabra por palabra, textos línea por línea, papeles que se pegan, sellos que se estampan y flechas que se dibujan (`css/movimiento.css`, `js/movimiento.js`).
+- Parallax suave en el hero, franja que acompaña la velocidad del scroll, costura de progreso, menú que marca la sección y botón para volver arriba.
+- Transición suave entre páginas en navegadores compatibles.
 - Carrusel de barrios con flechas, miniaturas, teclado y gestos táctiles.
 - Cuatro recorridos con proceso gráfico, paletas, lugares y productos.
 - Franja continua de derecha a izquierda, sin cortes entre vueltas.
@@ -51,8 +55,12 @@ Retazos/
 │   ├── estilos.css
 │   ├── recortes.css
 │   ├── actualizacion.css
-│   └── barrios.css
-├── js/main.js
+│   ├── barrios.css
+│   ├── escala.css
+│   └── movimiento.css
+├── js/
+│   ├── main.js
+│   └── movimiento.js
 ├── .gitignore
 ├── .vercelignore
 └── vercel.json
@@ -83,6 +91,6 @@ GitHub Pages usa publicación mediante Actions; no hay un flujo automático que 
 
 La tienda deriva las consultas a Instagram; no incluye pagos ni inventario conectado. El formulario de novedades valida el correo localmente y aún necesita un servicio de envío: no guarda ni transmite direcciones. Los lugares sin fotografía en la entrega original conservan sus tramas.
 
-Con la preferencia de movimiento reducido se desactivan las transiciones y el desplazamiento suave. La franja conserva el movimiento continuo solicitado para esta versión.
+Con la preferencia de movimiento reducido se desactivan las transiciones, las animaciones de entrada, el parallax y el desplazamiento suave. La franja conserva el movimiento continuo solicitado para esta versión.
 
 El bloqueo de arrastre y del menú de imágenes dificulta la copia casual. No impide capturas de pantalla ni el acceso a recursos públicos mediante las herramientas del navegador.
