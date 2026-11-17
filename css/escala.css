@@ -19,8 +19,28 @@
   }
   .seccion { width: var(--caja); margin-inline: auto; }
 
+  /* Encabezado (opción B): los cinco menús juntos a la izquierda, el logo en el
+     centro y los íconos a la derecha. Los dos extremos se apoyan en los bordes
+     de la ventana (con un margen), no en los de la caja, para usar todo el ancho. */
+  .cabecera { --borde: clamp(24px, 3.2vw, 72px); }
+  .nav-links {
+    position: absolute;
+    left: calc(var(--borde) - var(--sangria));
+    top: calc(71.01 * var(--u));
+    display: flex;
+    gap: calc(28 * var(--u));
+    margin: 0; padding: 0;
+  }
+  @media (max-width: 1320px) { .nav-links { gap: calc(18 * var(--u)); } }
+  .nav-links .t-nav { position: relative; left: auto; top: auto; display: block; }
+  .icono-bolsa  { left: calc((1440 - 21) * var(--u) + var(--sangria) - var(--borde)); }
+  .icono-buscar { left: calc((1440 - 21 - 45) * var(--u) + var(--sangria) - var(--borde)); }
+
   /* Lo que va de borde a borde en la maqueta, sigue yendo de borde a borde */
   .barra { left: calc(-1 * var(--sangria)); width: 100cqw; }
+  /* el texto de la barra se mide desde la barra, que ahora empieza en el borde:
+     se le devuelve el corrimiento para que siga centrado sobre el logo */
+  .barra > .t-barra { left: calc(var(--x) * var(--u) + var(--sangria)); }
   .hero-foto, .ferias-foto {
     left: calc(var(--x) * var(--u) - var(--sangria));
     width: calc(var(--w) * var(--u) + 2 * var(--sangria));
