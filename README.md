@@ -59,6 +59,6 @@ Los textos están en cada HTML; los estilos compartidos en `css/barrios.css`, y 
 
 `vercel.json` configura `node scripts/build-static.mjs` como comando de construcción y `public/` como salida. El script utiliza los recursos locales autorizados o los ya servidos por el sitio publicado. Si falta un recurso requerido, la preparación falla para evitar una entrega incompleta.
 
-La carpeta `public/` está ignorada por Git. Los cambios de documentación no requieren subir imágenes. Para incorporar recursos nuevos se necesita la copia autorizada o un origen aprobado del proyecto.
+La carpeta `public/` está ignorada por Git. 
 
 </details>
