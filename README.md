@@ -1,96 +1,64 @@
 # Retazos · Edición CABA
 
-**Llevate un rincón del barrio.** Papelería con los colores, las texturas y las historias de Buenos Aires.
+**Una web para recorrer Buenos Aires a través de su papelería.**
 
-[Visitar la web](https://retazoscaba.vercel.app/) · [Instagram @retazos_ar](https://www.instagram.com/retazos_ar/)
+Retazos convierte fachadas, carteles y detalles de La Boca, Palermo, San Telmo y Caballito en libretas, kits, totes y un pasaporte para coleccionar barrios. La web conecta la colección con los recorridos que la inspiraron.
 
-## El proyecto
+**[Visitar la web](https://retazoscaba.vercel.app/) · [Instagram](https://www.instagram.com/retazos_ar/)**
 
-Retazos transforma recorridos, fachadas, carteles y detalles de la ciudad en libretas, kits de retazos, totes y un pasaporte para coleccionar barrios. La web presenta la colección y conecta los recorridos de La Boca, Palermo, San Telmo y Caballito.
+## Participación
 
-**Diseño e identidad visual:** [Evelin Standke](https://www.linkedin.com/in/evelin-standke-624773318/).  
-**Desarrollo web:** [Juan Esteban Herrera Herrera](https://github.com/JuanEstebanHerreraH).
+**Desarrollo web:** [Juan Esteban Herrera Herrera](https://github.com/JuanEstebanHerreraH). Implementación de las páginas, adaptación a distintos tamaños de pantalla e interacciones en HTML, CSS y JavaScript.
 
-## Recorrer la edición
+**Diseño e identidad visual:** [Evelin Standke](https://www.linkedin.com/in/evelin-standke-624773318/). La identidad y los recursos gráficos pertenecen al proyecto; el repositorio público conserva el código y la documentación.
+
+## Qué puedes explorar
+
+- Inicio con carrusel de barrios, navegación con teclado y gestos táctiles.
+- Cuatro recorridos con paletas, lugares de interés y productos.
+- Catálogo con consultas por Instagram.
+- Animaciones de entrada, parallax y transiciones entre páginas en navegadores compatibles.
+- Diseño para escritorio, tablet y celular, con foco visible y enlace para saltar al contenido.
 
 | Barrio | Recorrido |
-|---|---|
-| [La Boca](https://retazoscaba.vercel.app/la-boca.html) | Chapas de colores que se ven desde el puerto. |
-| [Palermo](https://retazoscaba.vercel.app/palermo.html) | Jacarandás, parques y un planetario a la vuelta. |
-| [San Telmo](https://retazoscaba.vercel.app/san-telmo.html) | Toldos, adoquines y casas que guardan historia. |
-| [Caballito](https://retazoscaba.vercel.app/caballito.html) | El barrio del canje, la veleta y el tranvía. |
+| --- | --- |
+| [La Boca](https://retazoscaba.vercel.app/la-boca.html) | Chapas, color e identidad portuaria. |
+| [Palermo](https://retazoscaba.vercel.app/palermo.html) | Jacarandás, parques y el planetario. |
+| [San Telmo](https://retazoscaba.vercel.app/san-telmo.html) | Toldos, adoquines e historia. |
+| [Caballito](https://retazoscaba.vercel.app/caballito.html) | Canje, veleta y tranvía. |
 
-Cada botón **Ver barrio** abre su recorrido: del barrio al papel, la paleta de colores, los lugares para conocer y los productos. El pie y **Seguí recorriendo** enlazan las cuatro páginas.
+## Una decisión de implementación
 
-## Código público y recursos visuales
+La web utiliza **HTML, CSS y JavaScript sin dependencias de aplicación**. Las páginas comparten los estilos de barrio y las interacciones, y mantienen su contenido en HTML. Esto permite ajustar cada composición sin incorporar un framework ni un servidor de aplicación.
 
-Este repositorio contiene el código HTML, CSS y JavaScript y su documentación. Las fotografías, ilustraciones, vectores, logos, tipografías, archivos de diseño y vistas de referencia se conservan por separado y están excluidos mediante `.gitignore`. El README tampoco incorpora imágenes de la marca.
+## Alcance actual
 
-La web publicada mantiene sus imágenes y su diseño. Una descarga de este repositorio contiene únicamente el código: para reproducir la web completa es necesario disponer de la copia autorizada de `img/` y `fuentes/`, con sus rutas y licencias originales. No se sustituyen esas piezas por imágenes ajenas.
+La tienda deriva las consultas a Instagram: no integra pagos ni inventario. El formulario de novedades valida el correo localmente y aún necesita un servicio de envío; no guarda ni transmite direcciones.
 
-## Funcionalidades
+La preferencia de movimiento reducido desactiva transiciones, entradas, parallax y desplazamiento suave; la franja conserva su movimiento continuo. El bloqueo de arrastre y menú de imágenes dificulta la copia casual, pero no impide capturas ni el acceso a recursos públicos.
 
-- Imágenes sin arrastre nativo y menú contextual de guardado desactivado sobre ellas; los enlaces y gestos del carrusel siguen disponibles.
-- Escala de escritorio que considera el ancho y el alto de la ventana: el inicio entra en pantalla y la composición no se agranda en monitores grandes (`css/escala.css`).
-- Animaciones de entrada por sección: títulos palabra por palabra, textos línea por línea, papeles que se pegan, sellos que se estampan y flechas que se dibujan (`css/movimiento.css`, `js/movimiento.js`).
-- Parallax suave en el hero, franja que acompaña la velocidad del scroll, costura de progreso, menú que marca la sección y botón para volver arriba.
-- Transición suave entre páginas en navegadores compatibles.
-- Carrusel de barrios con flechas, miniaturas, teclado y gestos táctiles.
-- Cuatro recorridos con proceso gráfico, paletas, lugares y productos.
-- Franja continua de derecha a izquierda, sin cortes entre vueltas.
-- Sección Sobre Retazos y accesos a Instagram desde el usuario, las fotografías y las consultas de productos.
-- Disposición para escritorio, tablet y celular, con menú móvil.
-- HTML semántico, textos alternativos, foco visible y enlace para saltar al contenido.
+<details>
+<summary><strong>Desarrollo local, recursos y publicación</strong></summary>
 
-## Estructura
+### Código y recursos visuales
 
-```text
-Retazos/
-├── index.html
-├── la-boca.html
-├── palermo.html
-├── san-telmo.html
-├── caballito.html
-├── css/
-│   ├── estilos.css
-│   ├── recortes.css
-│   ├── actualizacion.css
-│   ├── barrios.css
-│   ├── escala.css
-│   └── movimiento.css
-├── js/
-│   ├── main.js
-│   └── movimiento.js
-├── .gitignore
-├── .vercelignore
-└── vercel.json
-```
+Las fotografías, ilustraciones, vectores, logos, tipografías, archivos de diseño y referencias se conservan por separado y están excluidos mediante `.gitignore`. El README tampoco incorpora imágenes de la marca: la vista completa está en la web publicada.
 
-**HTML5 · CSS3 · JavaScript**, sin dependencias de aplicación ni compilación. Los textos se editan en cada HTML; los estilos de los barrios se comparten en `css/barrios.css` y las interacciones en `js/main.js`.
+Para reproducir el sitio completo se necesita la copia autorizada de `img/` y `fuentes/`, respetando sus rutas y licencias. No uses `git add -f` ni subas archivos comprimidos con esos recursos.
 
-## Trabajar con la copia completa
+### Trabajar con el proyecto
 
-1. Cloná el código y obtené los recursos visuales por el canal autorizado del proyecto.
-2. Colocá `img/` y `fuentes/` en la raíz, respetando los nombres existentes.
-3. Abrí `index.html` o usá un servidor estático local.
-4. Antes de publicar cambios, comprobá que las imágenes y las fuentes estén presentes.
+1. Clona el repositorio y consigue los recursos por el canal autorizado.
+2. Coloca `img/` y `fuentes/` en la raíz.
+3. Abre `index.html` o usa un servidor estático local.
+4. Comprueba las cinco páginas, el menú móvil, el carrusel y los enlaces antes de publicar.
 
-Los recursos siguen en el disco local, pero Git los ignora. No uses `git add -f` sobre ellos ni subas archivos comprimidos que los contengan.
+Los textos están en cada HTML; los estilos compartidos en `css/barrios.css`, y las interacciones en `js/main.js`. La escala se ajusta en `css/escala.css` y el movimiento en `js/movimiento.js`.
 
-## Publicación
+### Preparar la publicación
 
-Los cambios de este repositorio no generan despliegues automáticos en Vercel. Para publicar, abrí el proyecto **retazoscaba**, entrá en **Deployments → Create Deployment** y elegí la revisión de código que querés publicar.
+`vercel.json` configura `node scripts/build-static.mjs` como comando de construcción y `public/` como salida. El script utiliza los recursos locales autorizados o los ya servidos por el sitio publicado. Si falta un recurso requerido, la preparación falla para evitar una entrega incompleta.
 
-El comando `node scripts/build-static.mjs` prepara `public/`: copia el código y utiliza los recursos locales autorizados cuando están presentes. Si faltan, reutiliza los recursos que ya sirve `https://retazoscaba.vercel.app`. Si algún recurso no está disponible, la preparación falla para evitar una publicación incompleta. Las imágenes no se guardan en el repositorio ni se agregan a su historial; `public/` también está ignorado por Git.
+La carpeta `public/` está ignorada por Git. Los cambios de documentación no requieren subir imágenes. Para incorporar recursos nuevos se necesita la copia autorizada o un origen aprobado del proyecto.
 
-Para incorporar imágenes nuevas se necesita la copia completa y autorizada o alojarlas previamente en un origen aprobado del proyecto. La publicación manual con Vercel CLI desde la copia completa también sigue disponible; `.vercelignore` incluye los recursos locales y excluye configuración local, credenciales y copias de seguridad.
-
-GitHub Pages usa publicación mediante Actions; no hay un flujo automático que vuelva a publicar este código sin sus recursos. Las publicaciones existentes se conservan.
-
-## Alcance
-
-La tienda deriva las consultas a Instagram; no incluye pagos ni inventario conectado. El formulario de novedades valida el correo localmente y aún necesita un servicio de envío: no guarda ni transmite direcciones. Los lugares sin fotografía en la entrega original conservan sus tramas.
-
-Con la preferencia de movimiento reducido se desactivan las transiciones, las animaciones de entrada, el parallax y el desplazamiento suave. La franja conserva el movimiento continuo solicitado para esta versión.
-
-El bloqueo de arrastre y del menú de imágenes dificulta la copia casual. No impide capturas de pantalla ni el acceso a recursos públicos mediante las herramientas del navegador.
+</details>
