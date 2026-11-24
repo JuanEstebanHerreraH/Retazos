@@ -1,0 +1,23 @@
+.producto-img, .b-producto img, .pasaporte-libro img {
+  object-fit: contain;
+  object-position: center;
+}
+.mosaico-extra { display: none; }
+.mosaico .mosaico-item:hover .mosaico-foto { filter: none; }
+@media (min-width: 1200px) {
+  .mosaico-extra {
+    display: block;
+    position: absolute;
+    width: calc(var(--sangria) + 24 * var(--u));
+    height: 51%;
+    object-fit: cover;
+    border: calc(7 * var(--u)) solid white;
+  }
+  .extra-1, .extra-3 { right: 99%; }
+  .extra-2, .extra-4 { left: 99%; }
+  .extra-1, .extra-2 { top: 0; }
+  .extra-3, .extra-4 { bottom: 0; }
+  .tienda .producto-info { text-align: center; }
+  .tienda .producto:nth-child(2) .producto-info { left: 29%; width: 20%; white-space: normal; }
+  .pasaporte-texto .linea { width: 58%; left: 21%; text-align: center; }
+}
