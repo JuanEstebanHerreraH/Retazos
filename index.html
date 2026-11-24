@@ -438,7 +438,7 @@
     const imagen = paso.querySelector('img[src$=".webp"]');
     cuaderno.querySelector('.cuaderno-imagen').src = imagen.src;
     cuaderno.querySelector('.cuaderno-numero').textContent = 'Paso ' + (actual + 1) + ' de 4';
-    cuaderno.querySelector('h2').textContent = paso.querySelector('.paso-t').textContent;
+    cuaderno.querySelector('h2').textContent = fichas[actual].getAttribute('aria-label').split(': ')[1];
     cuaderno.querySelector('.cuaderno-nota').textContent = notas[actual];
   }
   fichas.forEach((boton, indice) => boton.addEventListener('click', () => {
