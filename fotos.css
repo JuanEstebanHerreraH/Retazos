@@ -17,7 +17,42 @@
   .extra-2, .extra-4 { left: 99%; }
   .extra-1, .extra-2 { top: 0; }
   .extra-3, .extra-4 { bottom: 0; }
-  .tienda .producto-info { text-align: center; }
-  .tienda .producto:nth-child(2) .producto-info { left: 29%; width: 20%; white-space: normal; }
   .pasaporte-texto .linea { width: 58%; left: 21%; text-align: center; }
+}
+
+#slide-la-boca .foto > img, #slide-caballito .foto > img {
+  left: 0; top: 0; width: 100%; height: 100%; object-fit: cover;
+}
+#slide-la-boca .foto > img { object-position: 50% 58%; }
+#slide-caballito .foto > img { object-position: 50% 48%; }
+.producto-datos { display: grid; gap: .32em; text-align: center; }
+.producto-datos > * { margin: 0; }
+.estampilla { cursor: pointer; }
+.estampilla .sello { padding: 0; border: 0; background: transparent; cursor: pointer; opacity: .58; }
+.estampilla.sellada .sello, .estampilla:hover .sello { opacity: 1; }
+.estampilla:focus-within .estampilla-foto { outline: 4px solid currentColor; outline-offset: -6px; }
+.sellos-estado, .pasaporte-reiniciar { text-align: center; font: inherit; }
+.sellos-estado { font-weight: 700; }
+.pasaporte-reiniciar { border: 1px solid currentColor; border-radius: 2em; padding: .5em 1em; background: transparent; color: inherit; cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+  .estampilla .sello { transition: opacity .18s; }
+  .estampilla.sellada .sello { animation: imprimir-sello .34s ease-out; }
+  @keyframes imprimir-sello {
+    0% { scale: 1.22; rotate: -9deg; } 62% { scale: .93; } 100% { scale: 1; }
+  }
+}
+@media (min-width: 1200px) {
+  .producto-1 { --col: 115; } .producto-2 { --col: 424; }
+  .producto-3 { --col: 732; } .producto-4 { --col: 1040; }
+  .producto-datos { position: absolute; left: calc(var(--col) * var(--u)); top: calc(619 * var(--u)); width: calc(290 * var(--u)); gap: calc(7 * var(--u)); }
+  .tienda .producto-datos > .a { position: static; width: auto; height: auto; white-space: normal; line-height: 1.18; }
+  .sellos-estado, .pasaporte-reiniciar { position: absolute; left: 50%; transform: translateX(-50%); }
+  .sellos-estado { top: 30%; width: 45%; }
+  .pasaporte-reiniciar { top: 90%; }
+}
+@media (max-width: 1199.98px) {
+  .producto-datos { margin-top: 10px; }
+  .producto-datos > * { margin: 0; }
+  .sellos-estado { margin: 12px 0 0; }
+  .pasaporte-reiniciar { margin-top: 16px; }
 }
