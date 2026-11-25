@@ -14,6 +14,15 @@ if (process.env.BLOB_STORE_ID || process.env.BLOB_READ_WRITE_TOKEN) {
     throw new Error('El paquete no coincide con la edición del 24 de noviembre.');
   }
   const images = JSON.parse(gunzipSync(bytes));
+  delete images['img/hero/foto-casas-de-chapa.webp'];
+  const portada = await get('foto-casas-de-chapa.webp', { access: 'private' });
+  if (portada?.statusCode !== 200) throw new Error('Falta la portada original.');
+  const foto = Buffer.from(await new Response(portada.stream).arrayBuffer());
+  if (createHash('sha256').update(foto).digest('hex') !== 'f0052db4b98691d471c23f7052b6543b0f585564d0143998c6e406ecdd89bdad') {
+    throw new Error('La portada original cambió.');
+  }
+  await mkdir('img/hero', { recursive: true });
+  await writeFile('img/hero/portada-original.webp', foto);
   for (const [file, contents] of Object.entries(images)) {
     if (!/^img\/(?:[a-z0-9_-]+\/)*[a-z0-9_-]+\.(?:webp|jpg)$/.test(file)) {
       throw new Error('Ruta de imagen inesperada.');

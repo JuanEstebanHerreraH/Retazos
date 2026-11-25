@@ -5,18 +5,17 @@
 .mosaico-extra { display: none; }
 .mosaico .mosaico-item:hover .mosaico-foto { filter: none; }
 @media (min-width: 1200px) {
+  .instagram { clip-path: inset(0 calc(-1 * var(--sangria)) 0); }
   .mosaico-extra {
-    display: block;
-    position: absolute;
-    width: calc(var(--sangria) + 24 * var(--u));
-    height: 51%;
-    object-fit: cover;
-    border: calc(7 * var(--u)) solid white;
+    display: block; position: absolute; background: white;
+    width: max(calc(290 * var(--u)), calc(var(--sangria) + 58 * var(--u)));
+    height: calc(312 * var(--u)); padding: calc(9 * var(--u));
   }
-  .extra-1, .extra-3 { right: 99%; }
-  .extra-2, .extra-4 { left: 99%; }
+  .mosaico-extra img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .extra-1, .extra-3 { right: 97%; }
+  .extra-2, .extra-4 { left: 97%; }
   .extra-1, .extra-2 { top: 0; }
-  .extra-3, .extra-4 { bottom: 0; }
+  .extra-3, .extra-4 { top: calc(295 * var(--u)); }
   .pasaporte-texto .linea { width: 58%; left: 21%; text-align: center; }
 }
 
@@ -82,4 +81,16 @@
 @media (max-width: 560px) {
   .cuaderno-hoja { grid-template-columns: 1fr; gap: .7rem; }
   .cuaderno-imagen { height: min(29dvh,13rem); }
+}
+
+/* La primera libreta ya incluye el papel en su imagen. */
+.b-producto img[src^="img/productos/"] {
+  box-sizing: border-box;
+  padding: 10%;
+  background: url("img/tienda/ficha-1.svg") center / 100% 100% no-repeat;
+}
+.b-hero + .b-franja { position: relative; margin-top: -0.32em; }
+@media (max-width: 767.98px) {
+  .b-hero { padding-bottom: 0; }
+  .b-hero + .b-franja { margin-top: -0.12em; }
 }
