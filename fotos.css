@@ -101,3 +101,25 @@
   object-fit: cover;
   object-position: center;
 }
+
+/* Las dos filas comparten el borde rasgado, incluso en pantallas anchas. */
+@media (min-width: 1200px) {
+  .instagram { height: calc(613 * var(--u)); }
+  .ig-tarjeta .ig-papel { left: calc(50% - 179 * var(--u)); top: calc(107 * var(--u)); }
+  .ig-tarjeta .ig-contenido { left: calc(50% - 131 * var(--u)); top: calc(198 * var(--u)); }
+  .mosaico-5 .mosaico-alma { width: calc(617 * var(--u)); }
+  .mosaico-5 .mosaico-foto { width: calc(603 * var(--u)); }
+  .mosaico-5 .mosaico-foto img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .mosaico-extra { padding: 0; height: calc(326 * var(--u)); background: transparent; }
+  .extra-3, .extra-4 { top: calc(284 * var(--u)); }
+}
+@media (max-width: 1199.98px) {
+  .instagram { padding-block: 8px; }
+  .instagram .ig-tarjeta { margin-bottom: 4px; }
+}
+.b-producto img[src^="img/productos/tote_"] {
+  display: block;
+  margin-inline: auto;
+  padding: 2%;
+  object-position: center;
+}
