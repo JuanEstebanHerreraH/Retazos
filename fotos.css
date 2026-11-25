@@ -94,3 +94,10 @@
   .b-hero { padding-bottom: 0; }
   .b-hero + .b-franja { margin-top: -0.12em; }
 }
+
+/* Encuadre de las fotos horizontales en las dos estampillas verticales. */
+.estampilla-1 .estampilla-foto > img,
+.estampilla-3 .estampilla-foto > img {
+  object-fit: cover;
+  object-position: center;
+}
